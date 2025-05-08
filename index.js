@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', initApp);
 async function initApp() {
   const codesEl = document.getElementById('codes');
   const codes = (await getAllCodes()).documents;
+  codesEl.innerHTML = '';
 
   for (const codeData of codes) displayCode(codesEl, codeData);
 }
