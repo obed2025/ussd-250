@@ -1,0 +1,54 @@
+.networks__item {
+  width: 1.25rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--color);
+  box-shadow: 0 0 1rem var(--primary-color);
+}
+
+.networks__item--mtn {
+  --color: hsl(60, 90%, 49%);
+}
+
+.networks__item--airtel {
+  --color: hsl(0, 84%, 52%);
+}
+
+.networks {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.codes__list-item {
+  position: relative;
+  background-color: hsla(0, 0%, 100%, 0);
+  padding: 1rem;
+  padding-top: 2.25rem;
+
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.25rem var(--text-color);
+  transition: box-shadow 0.25s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 0.75rem var(--primary-color);
+  }
+
+  a {
+    color: var(--secondary-color);
+    transition: color 0.25s ease-in-out;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.codes__list-item:not(:last-child) {
+  margin-bottom: 1rem;
+}
