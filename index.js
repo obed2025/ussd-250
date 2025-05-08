@@ -6,11 +6,14 @@ async function initApp() {
   const codesEl = document.getElementById('codes');
   const codes = (await getAllCodes()).documents;
 
-  codes.forEach(({ code, title, description, MTN, Airtel }) => {
-    const li = document.createElement('li');
-    li.className = 'codes__list-item';
+  for (const codeData of codes) displayCode(codesEl, codeData);
+}
 
-    li.innerHTML = `
+function displayCode(codesEl, { code, title, description, MTN, Airtel }) {
+  const li = document.createElement('li');
+  li.className = 'codes__list-item';
+
+  li.innerHTML = `
       <a href="tel:${code.replace('#', '%23')}"><h2>${code}</h2></a>
       <h4>${title}</h4>
       ${description ? `<p>${description}</p>` : ''}
@@ -24,6 +27,5 @@ async function initApp() {
       </ul>
     `;
 
-    codesEl.appendChild(li);
-  });
+  codesEl.appendChild(li);
 }
