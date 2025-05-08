@@ -19,3 +19,16 @@ export async function getAllCodes() {
 
   return result;
 }
+
+export async function createCode(data) {
+  const id = Math.random().toString(36).substring(2, 9);
+
+  const result = await databases.createDocument(
+    APPWRITE_DATABASE_ID,
+    APPWRITE_COLLECTION_ID,
+    id,
+    data
+  );
+
+  return result;
+}

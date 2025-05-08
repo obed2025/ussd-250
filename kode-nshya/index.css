@@ -1,0 +1,55 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label,
+p {
+  margin-block: 0.5rem;
+  font-weight: 600;
+}
+
+input:not([type='checkbox']),
+textarea {
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.15rem solid var(--primary-color);
+
+  &:focus {
+    outline-color: var(--secondary-color);
+    border-bottom: none;
+  }
+}
+
+button {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+
+  font-weight: 700;
+  border: none;
+  border-radius: 0.3rem;
+  letter-spacing: 0.09rem;
+  cursor: pointer;
+
+  transition: opacity 0.35s ease-in-out;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+div {
+  margin-block: 1.5rem;
+}
+
+div label {
+  margin-inline: 0.5rem;
+}
+
+p {
+  text-decoration: underline;
+  color: var(--secondary-color);
+}
