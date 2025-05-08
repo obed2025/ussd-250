@@ -1,55 +1,62 @@
-form {
-  display: flex;
-  flex-direction: column;
+.form-container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 30rem;
+  margin: auto;
+  border: 0.1rem solid var(--secondary-color);
 }
 
-label,
-p {
-  margin-block: 0.5rem;
-  font-weight: 600;
+h2 {
+  text-align: center;
+  color: #333;
 }
 
-input:not([type='checkbox']),
+label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #555;
+}
+
+input[type='text'],
 textarea {
-  padding: 0.5rem;
-  background-color: transparent;
-  border: none;
-  border-bottom: 0.15rem solid var(--primary-color);
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
 
-  &:focus {
-    outline-color: var(--secondary-color);
-    border-bottom: none;
+input[type='text']:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1rem 1fr;
+  gap: 0.5rem 0.35rem;
+  margin-bottom: 1.5rem;
+
+  label {
+    margin: 0;
   }
 }
 
 button {
-  width: fit-content;
-  padding: 0.5rem 1rem;
-  background-color: var(--primary-color);
-  color: var(--bg-color);
-
-  font-weight: 700;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 0.3rem;
-  letter-spacing: 0.09rem;
+  border-radius: 4px;
   cursor: pointer;
-
-  transition: opacity 0.35s ease-in-out;
-
-  &:hover {
-    opacity: 0.85;
-  }
+  transition: background-color 0.3s;
+  font-weight: bold;
 }
 
-div {
-  margin-block: 1.5rem;
-}
-
-div label {
-  margin-inline: 0.5rem;
-}
-
-p {
-  text-decoration: underline;
-  color: var(--secondary-color);
+button:hover {
+  background-color: #0056b3;
 }

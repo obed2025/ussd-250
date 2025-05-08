@@ -3,11 +3,10 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background-color: var(--color);
-  box-shadow: 0 0 1rem var(--primary-color);
 }
 
 .networks__item--mtn {
-  --color: hsl(60, 90%, 49%);
+  --color: hsl(45, 100%, 50%);
 }
 
 .networks__item--airtel {
@@ -32,11 +31,11 @@
   padding-top: 2.25rem;
 
   border-radius: 0.5rem;
-  box-shadow: 0 0 0.25rem var(--text-color);
-  transition: box-shadow 0.25s ease-in-out;
+  border: 0.15rem solid var(--text-color);
+  transition: transform 0.25s ease-in-out;
 
   &:hover {
-    box-shadow: 0 0 0.75rem var(--primary-color);
+    transform: translateY(0.5rem);
   }
 
   a {
@@ -49,6 +48,8 @@
   }
 }
 
-.codes__list-item:not(:last-child) {
-  margin-bottom: 1rem;
+#codes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem 1rem;
 }

@@ -25,26 +25,47 @@
       <a class="header__link" href="../"><i class="fas fa-home"></i></a>
     </header>
     <main>
-      <form>
-        <label for="code">Kode</label>
-        <input type="text" id="code" name="code" required />
-        <label for="title">Umutwe</label>
-        <input type="text" id="title" name="title" required />
+      <div class="form-container">
+        <form>
+          <h2>Uzuza iyi fishi ikurikira!</h2>
+          <label for="code">Kode</label>
+          <input
+            placeholder="uregero: *182#"
+            type="text"
+            id="code"
+            name="code"
+            required
+          />
 
-        <p>Ibikurikiyeho ni amahitamo yawe kubyuzuza!</p>
+          <label for="title">Umutwe</label>
+          <input
+            placeholder="urugero: Mobile Money"
+            type="text"
+            id="title"
+            name="title"
+            required
+          />
 
-        <label for="description">Ubusobanuro</label>
-        <textarea name="description" id="description"></textarea>
+          <p>Ibikurikiyeho ni amahitamo yawe kubyuzuza!</p>
 
-        <div>
-          <input type="checkbox" name="MTN" id="mtn" />
-          <label for="mtn">MTN</label>
-          <input type="checkbox" name="Airtel" id="airtel" />
-          <label for="airtel">Airtel</label>
-        </div>
+          <label for="description">Ubusobanuro</label>
+          <textarea
+            name="description"
+            id="description"
+            rows="4"
+            placeholder="Andika hano..."
+          ></textarea>
 
-        <button>Emeza</button>
-      </form>
+          <div class="checkbox-group">
+            <input type="checkbox" name="MTN" id="mtn" />
+            <label for="mtn">MTN</label>
+            <input type="checkbox" name="Airtel" id="airtel" />
+            <label for="airtel">Airtel</label>
+          </div>
+
+          <button type="submit">Emeza</button>
+        </form>
+      </div>
     </main>
   </body>
 </html>

@@ -19,10 +19,27 @@ html {
 }
 
 body {
-  margin: 1rem auto;
-  max-width: 30rem;
+  margin: auto;
+  max-width: 80rem;
   color: var(--text-color);
   background-color: var(--bg-color);
+  padding-inline: 3.75rem;
+
+  @media (width <= 46.875rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width <= 32.5rem) {
+    padding-inline: 1.875rem;
+  }
+
+  @media (width <= 25rem) {
+    padding-inline: 1.25rem;
+  }
+}
+
+main {
+  padding-block: 1.5rem 2.5rem;
 }
 
 li {
@@ -55,7 +72,12 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 3rem;
+  padding-block: 1rem;
+
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background-color: var(--bg-color);
 }
 
 .header__brand {
