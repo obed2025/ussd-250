@@ -1,0 +1,78 @@
+---
+const URL = Astro.url.pathname;
+
+interface Link {
+  text: string;
+  href: string;
+  icon: string;
+}
+
+const LINKS: Link[] = [
+  {
+    text: 'Home',
+    href: '/',
+    icon: 'house',
+  },
+  {
+    text: 'Codes',
+    href: '/codes',
+    icon: 'asterisk',
+  },
+  {
+    text: 'Add new',
+    href: '/new',
+    icon: 'plus',
+  },
+];
+
+LINKS.map((link) => {
+  link.icon = 'fa-solid fa-' + link.icon;
+});
+---
+
+<header>
+  <nav>
+    <ul>
+      <li>
+        <h1>USSD 250</h1>
+      </li>
+    </ul>
+    <ul>
+      {
+        LINKS.map(({ href, icon, text }) => (
+          <li>
+            <a
+              {href}
+              class:list={[
+                'outline',
+                { secondary: URL !== href },
+                { primary: URL === href },
+              ]}
+              role="button"
+            >
+              <>
+                <i class={icon} />
+                <span> {text}</span>
+              </>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style>
+  h1 {
+    margin-bottom: 0;
+    color: var(--pico-primary);
+  }
+
+  a {
+    margin-top: 0;
+  }
+
+  i {
+    margin-right: 0.5rem;
+  }
+</style>
