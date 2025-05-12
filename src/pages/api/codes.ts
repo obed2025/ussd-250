@@ -1,4 +1,4 @@
-import { Client, Databases, ID, type Models } from 'appwrite';
+import { Client, Databases, ID, type Models } from 'node-appwrite';
 import type { APIRoute } from 'astro';
 
 const {
@@ -8,12 +8,23 @@ const {
   APPWRITE_COLLECTION_ID,
 } = import.meta.env;
 
+if (
+  !APPWRITE_API_ENDPOINT ||
+  !APPWRITE_COLLECTION_ID ||
+  !APPWRITE_DATABASE_ID ||
+  !APPWRITE_PROJECT_ID
+) {
+  throw new Error(
+    'Please make sure that all environment variables are provided'
+  );
+}
+
 const client = new Client();
 client.setEndpoint(APPWRITE_API_ENDPOINT).setProject(APPWRITE_PROJECT_ID);
 
 const databases = new Databases(client);
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async () => {
   try {
     const data = await databases.listDocuments(
       APPWRITE_DATABASE_ID,

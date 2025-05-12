@@ -1,9 +1,9 @@
 ---
-import type { Models } from 'appwrite';
+import type { Models } from 'node-appwrite';
 import type { Code } from '../types';
 
 const res = await fetch(new URL('/api/codes', Astro.url));
-const codes: Models.DocumentList<Code & Models.Document> = await res.json();
+const codes: Models.DocumentList<Code> = await res.json();
 
 const { total } = codes;
 const mtn = codes.documents.filter((code) => code.MTN).length;
