@@ -34,7 +34,9 @@ const { title = 'Home' } = Astro.props;
   </head>
   <body class="container">
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
 
