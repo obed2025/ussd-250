@@ -48,13 +48,18 @@ export const POST: APIRoute = async ({ request }) => {
     try {
       const body = await request.json();
 
-      const result = await databases.createDocument(
-        APPWRITE_DATABASE_ID,
-        APPWRITE_COLLECTION_ID,
-        ID.unique(),
-        body
-      );
-      return new Response(JSON.stringify(mapDocuments(result)));
+      if (isValidUSSDCode(body.code) || Number(body.code)) {
+        const result = await databases.createDocument(
+          APPWRITE_DATABASE_ID,
+          APPWRITE_COLLECTION_ID,
+          ID.unique(),
+          body
+        );
+
+        return new Response(JSON.stringify(mapDocuments(result)));
+      } else {
+        throw new Error('Invalid USSD code');
+      }
     } catch (error) {
       return new Response(JSON.stringify(error), { status: 422 });
     }
@@ -68,4 +73,10 @@ function mapDocuments(document: Models.Document) {
     document;
 
   return { $id, $createdAt, $updatedAt, code, title, description, MTN, Airtel };
+}
+
+function isValidUSSDCode(code: string) {
+  // Regular expression to match USSD codes with multiple segments
+  const ussdRegex = /^\*[\d]+(\*[\d]+)*#$/;
+  return ussdRegex.test(code);
 }
