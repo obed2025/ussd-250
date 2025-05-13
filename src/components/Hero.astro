@@ -12,14 +12,16 @@
       usdd codes added to this site more secure no one can edit or delete any
       code from this site except admin.
     </p>
-    <a role="button" href="/codes">
-      <i class="fa-solid fa-eye"></i>
-      View current codes
-    </a>
-    <a role="button" class="secondary" href="/new">
-      <i class="fa-solid fa-plus"></i>
-      Add a new one
-    </a>
+    <div class="btns-container">
+      <a role="button" href="/codes">
+        <i class="fa-solid fa-eye"></i>
+        View current codes
+      </a>
+      <a role="button" class="secondary" href="/new">
+        <i class="fa-solid fa-plus"></i>
+        Add a new one
+      </a>
+    </div>
   </div>
   <video src="/hero.mp4" autoplay loop muted></video>
 </section>
@@ -27,12 +29,29 @@
 <style>
   section {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    --min: 20rem;
+    grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
     gap: 2rem;
   }
 
   video {
     max-width: 100%;
     border-radius: 0.5rem;
+  }
+
+  .btns-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    a {
+      flex-grow: 1;
+    }
+  }
+
+  @media (width < 22rem) {
+    section {
+      --min: 10rem;
+    }
   }
 </style>

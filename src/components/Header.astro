@@ -30,14 +30,21 @@ LINKS.map((link) => {
 });
 ---
 
-<header>
+<header id="header">
   <nav>
     <ul>
       <li>
         <h1>USSD 250</h1>
       </li>
     </ul>
-    <ul>
+    <ul class="small-only" id="menu-icon">
+      <li>
+        <button>
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </li>
+    </ul>
+    <ul class="menu" id="menu">
       {
         LINKS.map(({ href, icon, text }) => (
           <li>
@@ -75,4 +82,75 @@ LINKS.map((link) => {
   i {
     margin-right: 0.5rem;
   }
+
+  .small-only {
+    display: none;
+  }
+
+  @media (width < 48rem) {
+    .small-only {
+      display: flex;
+
+      button {
+        all: unset;
+        padding: 0.1rem;
+        cursor: pointer;
+
+        &:focus-visible {
+          outline: 0.2rem solid var(--pico-primary);
+        }
+      }
+
+      i {
+        font-size: 2rem;
+        margin: 0;
+      }
+    }
+
+    .menu {
+      flex-direction: column;
+      align-items: start;
+      position: absolute;
+
+      left: 0;
+      top: var(--header-height);
+
+      background-color: var(--pico-background-color);
+      box-shadow: inset 0 0 0.5rem var(--pico-color-jade-300);
+      width: 100%;
+      border-radius: 0.5rem;
+
+      /* Use 105% to avoid shadow overflow */
+      transform: translateX(105%);
+      transition: transform 0.5s ease-in-out;
+
+      a {
+        border: none;
+      }
+
+      &.show {
+        transform: translateX(0);
+      }
+    }
+  }
 </style>
+
+<script>
+  const menuIcon = document.getElementById('menu-icon');
+  const menu = document.getElementById('menu');
+  const header = document.getElementById('header');
+
+  if (menuIcon) {
+    menuIcon.onclick = handleMenu;
+  }
+
+  function handleMenu() {
+    if (!menuIcon) return;
+
+    menu?.classList.toggle('show');
+    menuIcon.querySelector('i')?.classList.toggle('fa-close');
+  }
+
+  const headerHeight = header?.getClientRects()[0].height ?? 0;
+  menu?.style.setProperty('--header-height', headerHeight + 'px');
+</script>
