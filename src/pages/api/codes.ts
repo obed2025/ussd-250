@@ -1,5 +1,6 @@
 import { Client, Databases, ID, type Models } from 'node-appwrite';
 import type { APIRoute } from 'astro';
+export const prerender = false;
 
 const {
   APPWRITE_API_ENDPOINT,

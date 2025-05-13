@@ -2,7 +2,9 @@
 import type { Models } from 'node-appwrite';
 import type { Code } from '../types';
 
-const res = await fetch(new URL('/api/codes', Astro.url));
+const res = await fetch(
+  new URL('/api/codes', Astro.url || Astro.request.headers.get('Referer'))
+);
 const codes: Models.DocumentList<Code> = await res.json();
 
 const { total } = codes;

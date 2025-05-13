@@ -1,0 +1,46 @@
+<section>
+  <h1><span></span> Codes</h1>
+  <h1 class="pico-color-yellow-300"><span class="mtn"></span> MTN Codes</h1>
+  <h1 class="pico-color-red-500"><span class="airtel"></span> Airtel Codes</h1>
+</section>
+
+<style>
+  section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  span {
+    width: 3rem;
+    height: 50%;
+    background-image: linear-gradient(
+      -45deg,
+      var(--pico-color),
+      var(--pico-background-color)
+    );
+    border-radius: 0.75rem;
+    animation: opacity 1s ease-in-out infinite;
+
+    &.mtn {
+      --pico-color: var(--pico-color-yellow-300);
+    }
+
+    &.airtel {
+      --pico-color: var(--pico-color-red-500);
+    }
+  }
+
+  @keyframes opacity {
+    50% {
+      opacity: 0.2;
+    }
+  }
+</style>
