@@ -1,0 +1,28 @@
+---
+import type { Models } from 'node-appwrite';
+import type { Code } from '../types';
+
+interface Props {
+  network?: 'mtn' | 'airtel';
+}
+
+const { network } = Astro.props;
+
+const res = await fetch(
+  new URL('/api/codes', Astro.url || Astro.request.headers.get('Referer'))
+);
+const codes: Models.DocumentList<Code> = await res.json();
+
+const total = (() => {
+  switch (network) {
+    case 'airtel':
+      return codes.documents.filter((code) => code.Airtel).length;
+    case 'mtn':
+      return codes.documents.filter((code) => code.MTN).length;
+    default:
+      return codes.total;
+  }
+})();
+---
+
+{total > 9 ? `9+` : total}

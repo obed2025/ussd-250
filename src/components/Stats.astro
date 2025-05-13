@@ -1,21 +1,27 @@
 ---
-import type { Models } from 'node-appwrite';
-import type { Code } from '../types';
-
-const res = await fetch(
-  new URL('/api/codes', Astro.url || Astro.request.headers.get('Referer'))
-);
-const codes: Models.DocumentList<Code> = await res.json();
-
-const { total } = codes;
-const mtn = codes.documents.filter((code) => code.MTN).length;
-const airtel = codes.documents.filter((code) => code.Airtel).length;
+import StatsTotal from './StatsTotal.astro';
+import StatsFallback from './StatsFallback.astro';
 ---
 
 <section>
-  <h1>{total} Codes</h1>
-  <h1 class="pico-color-yellow-300">{mtn} MTN Codes</h1>
-  <h1 class="pico-color-red-500">{airtel} Airtel Codes</h1>
+  <h1>
+    <StatsTotal server:defer>
+      <StatsFallback slot="fallback" />
+    </StatsTotal>
+    Total Codes
+  </h1>
+  <h1 class="pico-color-yellow-300">
+    <StatsTotal server:defer network="mtn">
+      <StatsFallback slot="fallback" />
+    </StatsTotal>
+    MTN Codes
+  </h1>
+  <h1 class="pico-color-red-500">
+    <StatsTotal server:defer network="airtel">
+      <StatsFallback slot="fallback" />
+    </StatsTotal>
+    Airtel Codes
+  </h1>
 </section>
 
 <style>

@@ -8,8 +8,6 @@ import StatsFallback from '../components/StatsFallback.astro';
 
 <Layout>
   <Hero />
-  <Stats server:defer>
-    <StatsFallback slot="fallback" />
-  </Stats>
+  <Stats />
   <Contact />
 </Layout>
