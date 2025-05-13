@@ -1,82 +1,32 @@
-import { Client, Databases, ID, type Models } from 'node-appwrite';
 import type { APIRoute } from 'astro';
+import { createCode, getCodes } from '../../appwrite';
 export const prerender = false;
-
-const {
-  APPWRITE_API_ENDPOINT,
-  APPWRITE_PROJECT_ID,
-  APPWRITE_DATABASE_ID,
-  APPWRITE_COLLECTION_ID,
-} = import.meta.env;
-
-if (
-  !APPWRITE_API_ENDPOINT ||
-  !APPWRITE_COLLECTION_ID ||
-  !APPWRITE_DATABASE_ID ||
-  !APPWRITE_PROJECT_ID
-) {
-  throw new Error(
-    'Please make sure that all environment variables are provided'
-  );
-}
-
-const client = new Client();
-client.setEndpoint(APPWRITE_API_ENDPOINT).setProject(APPWRITE_PROJECT_ID);
-
-const databases = new Databases(client);
 
 export const GET: APIRoute = async () => {
   try {
-    const data = await databases.listDocuments(
-      APPWRITE_DATABASE_ID,
-      APPWRITE_COLLECTION_ID
-    );
-
-    return new Response(
-      JSON.stringify({
-        total: data.total,
-        documents: data.documents.map(mapDocuments),
-      })
-    );
+    return new Response(JSON.stringify(await getCodes()));
   } catch (error) {
     return new Response(JSON.stringify(error), { status: 500 });
   }
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  if (request.headers.get('Content-Type') === 'application/json') {
-    try {
-      const body = await request.json();
-
-      if (isValidUSSDCode(body.code) || Number(body.code)) {
-        const result = await databases.createDocument(
-          APPWRITE_DATABASE_ID,
-          APPWRITE_COLLECTION_ID,
-          ID.unique(),
-          body
-        );
-
-        return new Response(JSON.stringify(mapDocuments(result)));
-      } else {
-        throw new Error('Invalid USSD code');
-      }
-    } catch (error) {
-      return new Response(JSON.stringify(error), { status: 422 });
-    }
+  if (request.headers.get('Content-Type') !== 'application/json') {
+    return new Response(JSON.stringify({ error: 'No data provided!' }), {
+      status: 400,
+    });
   }
 
-  return new Response(null, { status: 400 });
+  try {
+    const body = await request.json();
+    const ussdRegex = /^\*[\d]+(\*[\d]+)*#$/;
+
+    if (ussdRegex.test(body.code) || Number(body.code)) {
+      return new Response(JSON.stringify(await createCode(body)));
+    } else {
+      throw new Error('Invalid USSD code');
+    }
+  } catch (error) {
+    return new Response(JSON.stringify(error), { status: 400 });
+  }
 };
-
-function mapDocuments(document: Models.Document) {
-  const { $id, $createdAt, $updatedAt, code, title, description, MTN, Airtel } =
-    document;
-
-  return { $id, $createdAt, $updatedAt, code, title, description, MTN, Airtel };
-}
-
-function isValidUSSDCode(code: string) {
-  // Regular expression to match USSD codes with multiple segments
-  const ussdRegex = /^\*[\d]+(\*[\d]+)*#$/;
-  return ussdRegex.test(code);
-}
