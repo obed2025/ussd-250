@@ -57,10 +57,8 @@ LINKS.map((link) => {
               ]}
               role="button"
             >
-              <>
-                <i class={icon} />
-                <span> {text}</span>
-              </>
+              <i class={icon} />
+              <span> {text}</span>
             </a>
           </li>
         ))
@@ -112,16 +110,17 @@ LINKS.map((link) => {
       align-items: start;
       position: absolute;
 
-      left: 0;
       top: var(--header-height);
+      right: 0;
+      margin: 0;
 
       background-color: var(--pico-background-color);
       box-shadow: inset 0 0 0.5rem var(--pico-color-jade-300);
-      width: 100%;
+      width: 75%;
+      height: calc(100vh - var(--header-height));
       border-radius: 0.5rem;
 
-      /* Use 105% to avoid shadow overflow */
-      transform: translateX(105%);
+      transform: translateX(100%);
       transition: transform 0.5s ease-in-out;
 
       a {
@@ -129,8 +128,14 @@ LINKS.map((link) => {
       }
 
       &.show {
-        transform: translateX(0);
+        transform: translateX(0%);
       }
+    }
+  }
+
+  @media (width < 36rem) {
+    .menu.show {
+      transform: translateX(-1rem);
     }
   }
 </style>

@@ -1,11 +1,15 @@
 <form>
   <h2>Contact us</h2>
 
-  <label for="email">Email</label>
-  <input type="email" name="email" id="email" placeholder="Enter your email" />
+  <label for="subject">Subject</label>
+  <input
+    type="text"
+    name="subject"
+    id="subject"
+    placeholder="Enter a subject"
+  />
   <label for="message">Message</label>
-  <textarea name="message" id="message" placeholder="Enter your message"
-  ></textarea>
+  <textarea name="message" id="message" placeholder="Type here"></textarea>
 
   <div>
     <button>
@@ -21,3 +25,19 @@
     justify-content: flex-end;
   }
 </style>
+
+<script>
+  const form = document.querySelector('form');
+  const subject = form?.querySelector(
+    'input[name="subject"]'
+  ) as HTMLInputElement;
+  const message = form?.querySelector(
+    'textarea[name="message"]'
+  ) as HTMLTextAreaElement;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    document.location = `mailto:obed6@duck.com?subject=${subject.value}&body=${message.value}`;
+  });
+</script>
