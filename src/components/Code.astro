@@ -1,0 +1,55 @@
+---
+import type { Code } from '../types';
+
+interface Props {
+  code: Code;
+}
+
+const { code } = Astro.props;
+const codeLink = code.code.replace('#', '%23');
+---
+
+<article
+  onclick=`document.location = 'tel:${codeLink}'`
+  class:list={[{ mtn: code.MTN }, { airtel: code.Airtel }]}
+>
+  <h2><a href=`tel:${codeLink}`>{code.code}</a></h2>
+  <h3>{code.title}</h3>
+  <p>{code.description}</p>
+</article>
+
+<style>
+  a:not(:hover) {
+    text-decoration: none;
+  }
+
+  a,
+  article,
+  a:hover {
+    --pico-color: var(--color);
+    --pico-underline: var(--color);
+  }
+
+  article {
+    border: 1px solid var(--color);
+    --color: var(--pico-color-grey-300);
+    margin: 0;
+    cursor: pointer;
+
+    &:hover a {
+      text-decoration: underline;
+    }
+
+    &.mtn.airtel {
+      --color: var(--pico-color-jade-200);
+    }
+
+    &.airtel:not(.mtn) {
+      --color: var(--pico-color-red-400);
+    }
+
+    &.mtn:not(.airtel) {
+      --color: var(--pico-color-yellow-100);
+    }
+  }
+</style>
