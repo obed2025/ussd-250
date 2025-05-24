@@ -1,4 +1,4 @@
-import { Client, Databases, ID } from 'node-appwrite';
+import { Client, Databases, ID, Query } from 'node-appwrite';
 
 const {
   APPWRITE_API_ENDPOINT,
@@ -22,7 +22,24 @@ if (databases instanceof Error) throw databases;
 export const getCodes = async () => {
   return await databases?.listDocuments(
     APPWRITE_DATABASE_ID,
-    APPWRITE_COLLECTION_ID
+    APPWRITE_COLLECTION_ID,
+    [Query.orderDesc('$updatedAt')]
+  );
+};
+
+export const getMTNCodes = async () => {
+  return await databases?.listDocuments(
+    APPWRITE_DATABASE_ID,
+    APPWRITE_COLLECTION_ID,
+    [Query.equal('MTN', [true])]
+  );
+};
+
+export const getAirtelCodes = async () => {
+  return await databases?.listDocuments(
+    APPWRITE_DATABASE_ID,
+    APPWRITE_COLLECTION_ID,
+    [Query.equal('Airtel', [true])]
   );
 };
 
