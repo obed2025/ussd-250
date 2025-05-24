@@ -19,11 +19,11 @@ const databases = (() => {
 
 if (databases instanceof Error) throw databases;
 
-export const getCodes = async () => {
+export const getCodes = async (n: number = 1) => {
   return await databases?.listDocuments(
     APPWRITE_DATABASE_ID,
     APPWRITE_COLLECTION_ID,
-    [Query.orderDesc('$updatedAt')]
+    [Query.orderDesc('$updatedAt'), Query.limit(25), Query.offset((n - 1) * 25)]
   );
 };
 

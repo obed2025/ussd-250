@@ -1,0 +1,84 @@
+---
+interface Props {
+  currentPage?: number;
+}
+
+const { currentPage = 1 } = Astro.props;
+const res = await fetch(new URL('/api/count', Astro.url.origin));
+const { count = 0 }: { count: number } = await res.json();
+const totalPages = Math.ceil(count / 25);
+
+const prev = currentPage - 1;
+const next = currentPage + 1;
+---
+
+<nav role="navigation" aria-label="Pagination">
+  <ul >
+    {prev > 0 && 
+      <li>
+      <a
+        href=`/current-codes/page/${prev}`
+        class="previous-page"
+        aria-label="Go to previous page"
+        >« Prev</a>
+      </li>
+    }
+
+    {Array.from({length: totalPages}).map((_, i) => ( 
+      <li class:list={[{active: (currentPage === (i + 1))}]}>
+        <a 
+        class="number" 
+        href=`/current-codes/page/${i + 1}` 
+        aria-label=`Go to page ${i + 1}`
+        >{i + 1} 
+        </a>
+      </li>
+    ))}
+
+    {next <= totalPages && 
+      <li>
+        <a 
+        href=`/current-codes/page/${next}` 
+        class="next-page" 
+        aria-label="Go to next page">
+          Next »
+        </a>
+      </li>
+    }
+  </ul>
+</nav> 
+
+<style>
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  ul {
+    display: inherit;
+    align-items: center;
+    background-color: light-dark(rgba(0, 0, 0, 0.1), rgba(250, 250, 250, 0.1)) ;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  li.active {
+    font-weight: bold;
+   box-shadow: inset 0 0 5px var(--pico-color);
+  }
+
+  li:not(:first-child, :last-child), ul {
+    border: 2px solid light-dark(#00000080, #ffffff80) ;
+
+    &:is(li) {
+      border-top: none;
+      border-bottom: none;
+    }
+
+    & + li {
+      border-left: none;
+    }
+  }
+</style>

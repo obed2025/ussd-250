@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { createCode, getCodes } from '../../appwrite';
+import { createCode, getCodes } from '../../../appwrite';
 export const prerender = false;
 
 export const GET: APIRoute = async () => {
