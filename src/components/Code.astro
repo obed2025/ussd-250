@@ -32,7 +32,7 @@ const codeLink = code.code.replace('#', '%23');
 
   article {
     border: 1px solid var(--color);
-    --color: var(--pico-color-grey-300);
+    --color: light-dark(var(--pico-color-grey-900), var(--pico-color-grey-300));
     margin: 0;
     cursor: pointer;
 
@@ -41,7 +41,10 @@ const codeLink = code.code.replace('#', '%23');
     }
 
     &.mtn.airtel {
-      --color: var(--pico-color-jade-200);
+      --color: light-dark(
+        var(--pico-color-jade-600),
+        var(--pico-color-jade-200)
+      );
     }
 
     &.airtel:not(.mtn) {
@@ -49,7 +52,10 @@ const codeLink = code.code.replace('#', '%23');
     }
 
     &.mtn:not(.airtel) {
-      --color: var(--pico-color-yellow-100);
+      --color: light-dark(
+        var(--pico-color-yellow-300),
+        var(--pico-color-yellow-100)
+      );
     }
   }
 </style>

@@ -11,7 +11,7 @@ const codes: Models.DocumentList<Code> = await res.json();
 
 <Layout title="Codes">
   <div>
-    {codes.documents.map((code) => <CodeComponent {code} />)}
+    {codes.documents?.map((code) => <CodeComponent {code} />)}
   </div>
 </Layout>
 
