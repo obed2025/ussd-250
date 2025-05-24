@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="New Code">
+  <form>
+    <label for="code">Code</label>
+    <input type="text" id="code" name="code" required />
+    <small style="display: none;" id="error">
+      May be code is invalid or it already exist!
+    </small>
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" required />
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" />
+
+    <label for="MTN">
+      <input type="checkbox" name="MTN" id="MTN" />
+      MTN
+    </label>
+    <label for="Airtel">
+      <input type="checkbox" name="Airtel" id="Airtel" />
+      Airtel
+    </label>
+
+    <button><i class="fa-solid fa-paper-plane"></i> Submit</button>
+  </form>
+</Layout>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  button {
+    width: fit-content;
+    align-self: flex-end;
+  }
+</style>
+
+<script>
+  document.querySelector('form')?.addEventListener('submit', handleSubmit);
+
+  async function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+
+    const code = (document.getElementById('code') as HTMLInputElement)?.value;
+    const title = (document.getElementById('title') as HTMLInputElement)?.value;
+    const description = (
+      document.getElementById('description') as HTMLInputElement
+    )?.value;
+    const MTN = (document.getElementById('MTN') as HTMLInputElement)?.checked;
+    const Airtel = (document.getElementById('Airtel') as HTMLInputElement)
+      ?.checked;
+
+    const response = await fetch('/api/codes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ code, title, description, MTN, Airtel }),
+    });
+
+    if (!response.ok) {
+      const codeEl = document.getElementById('code');
+      const smallEl = document.getElementById('error');
+
+      if (codeEl && smallEl) {
+        codeEl.ariaInvalid = 'true';
+        smallEl.style.display = 'block';
+      }
+    } else {
+      document.location = '/current-codes';
+    }
+  }
+</script>
