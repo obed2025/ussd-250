@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getMTNCodes } from '../../../appwrite';
+export const prerender = false;
 
 export const GET: APIRoute = async () => {
   try {

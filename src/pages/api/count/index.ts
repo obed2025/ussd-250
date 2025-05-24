@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { getCodes } from '../../../appwrite';
+export const prerender = false;
 
 export const GET: APIRoute = async () => {
   try {
