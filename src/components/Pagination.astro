@@ -12,7 +12,7 @@ const prev = currentPage - 1;
 const next = currentPage + 1;
 ---
 
-<nav role="navigation" aria-label="Pagination">
+<nav role="navigation" aria-label="Pagination" class:list={[{show: totalPages > 1}]}>
   <ul >
     {prev > 0 && 
       <li>
@@ -85,5 +85,9 @@ const next = currentPage + 1;
     & + li {
       border-left: none;
     }
+  }
+
+  nav:not(.show) {
+    display: none;
   }
 </style>
