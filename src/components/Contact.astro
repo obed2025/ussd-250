@@ -1,4 +1,4 @@
-<form>
+<form id="contact-form">
   <h2>Contact us</h2>
 
   <label for="subject">Subject</label>
@@ -27,7 +27,7 @@
 </style>
 
 <script>
-  const form = document.querySelector('form');
+  const form = document.querySelector('#contact-form');
   const subject = form?.querySelector(
     'input[name="subject"]'
   ) as HTMLInputElement;

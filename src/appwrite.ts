@@ -50,3 +50,17 @@ export const createCode = async (params: Object) =>
     ID.unique(),
     params
   );
+
+export const getSearchResults = async (query: string) => {
+  return await databases?.listDocuments(
+    APPWRITE_DATABASE_ID,
+    APPWRITE_COLLECTION_ID,
+    [
+      Query.or([
+        Query.contains('title', query),
+        Query.contains('code', query),
+        Query.contains('description', query),
+      ]),
+    ]
+  );
+};
