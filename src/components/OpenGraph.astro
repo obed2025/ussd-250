@@ -1,0 +1,27 @@
+---
+const url = Astro.url;
+
+const { origin, host } = url;
+const imageURL = origin + '/open-graph.png';
+const title = 'USSD-250';
+const desc =
+  'USSD-250 is a free web tool for most used USSD codes and emergency numbers in Rwanda';
+---
+
+<!-- HTML Meta Tags -->
+<meta name="description" content={desc} />
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content={origin} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={desc} />
+<meta property="og:image" content={imageURL} />
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:domain" content={host} />
+<meta property="twitter:url" content={origin} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={desc} />
+<meta name="twitter:image" content={imageURL} />

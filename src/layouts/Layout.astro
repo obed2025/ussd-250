@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '@fortawesome/fontawesome-free/css/all.css';
 import SearchBox from '../components/SearchBox.astro';
+import OpenGraph from '../components/OpenGraph.astro';
 
 interface Props {
   title?: string;
@@ -19,6 +20,7 @@ const { title = 'Home' } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>USSD 250 - {title}</title>
+    <OpenGraph />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css"
