@@ -34,7 +34,9 @@ LINKS.map((link) => {
   <nav>
     <ul>
       <li>
-        <h1>USSD 250</h1>
+        <a href="/">
+          <strong>USSD 250</strong>
+        </a>
       </li>
     </ul>
     <ul class="small-only" id="menu-icon">
@@ -68,9 +70,12 @@ LINKS.map((link) => {
 </header>
 
 <style>
-  h1 {
-    margin-bottom: 0;
-    color: var(--pico-primary);
+  strong {
+    font-size: 2rem;
+  }
+
+  a:has(strong):hover {
+    text-decoration: none;
   }
 
   a {
