@@ -3,6 +3,7 @@ import '@fontsource-variable/roboto';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '@fortawesome/fontawesome-free/css/all.css';
+import SearchBox from '../components/SearchBox.astro';
 
 interface Props {
   title?: string;
@@ -30,6 +31,7 @@ const { title = 'Home' } = Astro.props;
   <body class="container">
     <Header />
     <main>
+      {Astro.url.pathname !== '/new' && <SearchBox />}
       <slot />
     </main>
     <Footer />

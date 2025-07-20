@@ -1,4 +1,5 @@
-import { Client, Databases, ID, Query } from 'node-appwrite';
+import { Client, Databases, ID, Query, type Models } from 'node-appwrite';
+import type { Code } from './types';
 
 const {
   APPWRITE_API_ENDPOINT,
@@ -52,7 +53,7 @@ export const createCode = async (params: Object) =>
   );
 
 export const getSearchResults = async (query: string) => {
-  return await databases?.listDocuments(
+  return (await databases?.listDocuments(
     APPWRITE_DATABASE_ID,
     APPWRITE_COLLECTION_ID,
     [
@@ -62,5 +63,5 @@ export const getSearchResults = async (query: string) => {
         Query.contains('description', query),
       ]),
     ]
-  );
+  )) as Models.DocumentList<Code>;
 };

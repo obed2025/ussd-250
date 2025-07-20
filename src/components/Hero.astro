@@ -1,11 +1,6 @@
-<form id="search-form">
-  <fieldset role="group">
-    <input type="search" placeholder="Search......" id="search-box" />
-    <button>
-      <i class="fa-solid fa-search"></i>
-    </button>
-  </fieldset>
-</form>
+---
+import HeroBtns from './HeroBtns.astro';
+---
 
 <section>
   <div>
@@ -21,16 +16,7 @@
       ussd codes added to this site more secure no one can edit or delete any
       code from this site except admin.
     </p>
-    <div class="btns-container">
-      <a role="button" href="/current-codes">
-        <i class="fa-solid fa-eye"></i>
-        View current codes
-      </a>
-      <a role="button" class="secondary" href="/new">
-        <i class="fa-solid fa-plus"></i>
-        Add a new one
-      </a>
-    </div>
+    <HeroBtns />
   </div>
   <video src="/hero.mp4" autoplay loop muted></video>
 </section>
@@ -48,29 +34,9 @@
     border-radius: 0.5rem;
   }
 
-  .btns-container {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-
-    a {
-      flex-grow: 1;
-    }
-  }
-
   @media (width < 22rem) {
     section {
       --min: 10rem;
     }
   }
 </style>
-
-<script>
-  const formEl = document.getElementById('search-form');
-  const searchBox = document.getElementById('search-box') as HTMLInputElement;
-
-  formEl?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    document.location = `/search-results?query=${searchBox.value}`;
-  });
-</script>
