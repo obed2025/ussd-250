@@ -1,0 +1,18 @@
+<form id="search-form">
+  <fieldset role="group">
+    <input type="search" placeholder="Search......" id="search-box" />
+    <button>
+      <i class="fa-solid fa-search"></i>
+    </button>
+  </fieldset>
+</form>
+
+<script>
+  const formEl = document.getElementById('search-form');
+  const searchBox = document.getElementById('search-box') as HTMLInputElement;
+
+  formEl?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.location = `/search-results?query=${searchBox.value}`;
+  });
+</script>
