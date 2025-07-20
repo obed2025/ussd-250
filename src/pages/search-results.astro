@@ -1,28 +1,16 @@
 ---
 import { getSearchResults } from '../appwrite';
+import CodesWrapper from '../components/CodesWrapper.astro';
 import Layout from '../layouts/Layout.astro';
-import CodeComponent from '../components/Code.astro';
-import type { Code } from '../types';
-import type { Models } from 'node-appwrite';
 
 export const prerender = false;
 const query = Astro.url.searchParams.get('query');
 
 if (!query) return Astro.redirect('/');
-const codes = (await getSearchResults(query)) as Models.DocumentList<Code>;
+const codes = await getSearchResults(query);
 ---
 
 <Layout title={query}>
   <h1>{codes.total ? 'Results for' : 'Nothing matches'} "{query}"</h1>
-  <div>
-    {codes.documents?.map((code) => <CodeComponent {code} />)}
-  </div>
+  <CodesWrapper {codes} />
 </Layout>
-
-<style>
-  div {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-</style>

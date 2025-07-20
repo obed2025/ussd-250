@@ -2,8 +2,8 @@
 import type { Models } from 'node-appwrite';
 import Layout from '../../layouts/Layout.astro';
 import type { Code } from '../../types';
-import CodeComponent from '../../components/Code.astro';
 import Pagination from '../../components/Pagination.astro';
+import CodesWrapper from '../../components/CodesWrapper.astro';
 export const prerender = false;
 
 const res = await fetch(new URL('/api/codes', Astro.url.origin));
@@ -11,16 +11,6 @@ const codes: Models.DocumentList<Code> = await res.json();
 ---
 
 <Layout title="Codes">
-  <div>
-    {codes.documents?.map((code) => <CodeComponent {code} />)}
-  </div>
+  <CodesWrapper {codes} />
   <Pagination />
 </Layout>
-
-<style>
-  div {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-</style>

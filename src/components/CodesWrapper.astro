@@ -1,0 +1,23 @@
+---
+import CodeComponent from '../components/Code.astro';
+import type { Code } from '../types';
+import type { Models } from 'node-appwrite';
+
+interface Props {
+  codes: Models.DocumentList<Code>;
+}
+
+const { codes } = Astro.props;
+---
+
+<div>
+  {codes.documents?.map((code) => <CodeComponent {code} />)}
+</div>
+
+<style>
+  div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+</style>
