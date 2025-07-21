@@ -4,6 +4,7 @@
     "npm:@astrojs/vercel@^8.0.4": "8.1.4_astro@5.7.13__vite@6.3.5___picomatch@4.0.2__zod@3.25.7",
     "npm:@fontsource-variable/roboto@^5.2.5": "5.2.5",
     "npm:@fortawesome/fontawesome-free@^6.7.2": "6.7.2",
+    "npm:@vercel/analytics@^1.5.0": "1.5.0",
     "npm:astro@^5.7.12": "5.7.13_vite@6.3.5__picomatch@4.0.2_zod@3.25.7",
     "npm:node-appwrite@16": "16.0.0"
   },
@@ -608,7 +609,8 @@
       "integrity": "sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g=="
     },
     "@vercel/edge@1.2.1": {
-      "integrity": "sha512-1++yncEyIAi68D3UEOlytYb1IUcIulMWdoSzX2h9LuSeeyR7JtaIgR8DcTQ6+DmYOQn+5MCh6LY+UmK6QBByNA=="
+      "integrity": "sha512-1++yncEyIAi68D3UEOlytYb1IUcIulMWdoSzX2h9LuSeeyR7JtaIgR8DcTQ6+DmYOQn+5MCh6LY+UmK6QBByNA==",
+      "deprecated": true
     },
     "@vercel/nft@0.29.3_acorn@8.14.1": {
       "integrity": "sha512-aVV0E6vJpuvImiMwU1/5QKkw2N96BRFE7mBYGS7FhXUoS6V7SarQ+8tuj33o7ofECz8JtHpmQ9JW+oVzOoB7MA==",
@@ -2516,6 +2518,7 @@
         "npm:@astrojs/vercel@^8.0.4",
         "npm:@fontsource-variable/roboto@^5.2.5",
         "npm:@fortawesome/fontawesome-free@^6.7.2",
+        "npm:@vercel/analytics@^1.5.0",
         "npm:astro@^5.7.12",
         "npm:node-appwrite@16"
       ]

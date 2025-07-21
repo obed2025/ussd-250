@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import '@fortawesome/fontawesome-free/css/all.css';
 import SearchBox from '../components/SearchBox.astro';
 import OpenGraph from '../components/OpenGraph.astro';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
@@ -21,6 +22,7 @@ const { title = 'Home' } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>USSD 250 - {title}</title>
     <OpenGraph />
+    <Analytics />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css"
