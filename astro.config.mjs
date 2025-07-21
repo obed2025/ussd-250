@@ -7,4 +7,5 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   adapter: vercel(),
   output: 'static',
+  site: 'https://ussd-250.vercel.app/',
 });
