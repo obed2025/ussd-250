@@ -1,19 +1,17 @@
 ---
+import { getAirtelCodes, getCodes, getMTNCodes } from '../appwrite';
+
 interface Props {
   network?: 'mtn' | 'airtel';
 }
 
 const { network } = Astro.props;
 
-const res = await fetch(
-  new URL(
-    `/api/count/${network ?? ''}`,
-    Astro.url || Astro.request.headers.get('Referer')
-  )
-);
-
-const codes: { count: number } = await res.json();
-const total = codes.count;
+const total: number = await (async () => {
+  if (network === 'airtel') return (await getAirtelCodes()).total;
+  else if (network === 'mtn') return (await getMTNCodes()).total;
+  else return (await getCodes()).total;
+})();
 ---
 
 {total > 99 ? `99+` : total}
