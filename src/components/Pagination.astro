@@ -1,11 +1,12 @@
 ---
+import { getCodes } from '../appwrite';
+
 interface Props {
   currentPage?: number;
 }
 
 const { currentPage = 1 } = Astro.props;
-const res = await fetch(new URL('/api/count', Astro.url.origin));
-const { count = 0 }: { count: number } = await res.json();
+const  count  = (await getCodes()).total
 const totalPages = Math.ceil(count / 25);
 
 const prev = currentPage - 1;
