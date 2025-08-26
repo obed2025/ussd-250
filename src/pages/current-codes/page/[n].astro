@@ -4,13 +4,13 @@ import Layout from '../../../layouts/Layout.astro';
 import type { Code } from '../../../types';
 import Pagination from '../../../components/Pagination.astro';
 import CodesWrapper from '../../../components/CodesWrapper.astro';
+import { getCodes } from '../../../appwrite';
 export const prerender = false;
 
 const pageNumber = Astro.params.n ?? 1;
-const res = await fetch(
-  new URL(`/api/codes/page/${pageNumber}`, Astro.url.origin)
-);
-const codes: Models.DocumentList<Code> = await res.json();
+const codes = (await getCodes(
+  +(Astro.params.n ?? '0')
+)) as Models.DocumentList<Code>;
 ---
 
 <Layout title="Codes">

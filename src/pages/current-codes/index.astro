@@ -4,10 +4,10 @@ import Layout from '../../layouts/Layout.astro';
 import type { Code } from '../../types';
 import Pagination from '../../components/Pagination.astro';
 import CodesWrapper from '../../components/CodesWrapper.astro';
+import { getCodes } from '../../appwrite';
 export const prerender = false;
 
-const res = await fetch(new URL('/api/codes', Astro.url.origin));
-const codes: Models.DocumentList<Code> = await res.json();
+const codes = (await getCodes()) as Models.DocumentList<Code>;
 ---
 
 <Layout title="Codes">

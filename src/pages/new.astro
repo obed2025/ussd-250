@@ -41,35 +41,25 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
+  import { actions } from 'astro:actions';
   document.querySelector('form')?.addEventListener('submit', handleSubmit);
 
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
+    const formEl = e.target as HTMLFormElement;
+    const formData = new FormData(formEl);
 
-    const code = (document.getElementById('code') as HTMLInputElement)?.value;
-    const title = (document.getElementById('title') as HTMLInputElement)?.value;
-    const description = (
-      document.getElementById('description') as HTMLInputElement
-    )?.value;
-    const MTN = (document.getElementById('MTN') as HTMLInputElement)?.checked;
-    const Airtel = (document.getElementById('Airtel') as HTMLInputElement)
-      ?.checked;
+    const { error } = await actions.codes.new(formData);
 
-    const response = await fetch('/api/codes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ code, title, description, MTN, Airtel }),
-    });
-
-    if (!response.ok) {
+    if (error) {
       const codeEl = document.getElementById('code');
       const smallEl = document.getElementById('error');
 
       if (codeEl && smallEl) {
+        smallEl.innerText = 'Error';
         codeEl.ariaInvalid = 'true';
         smallEl.style.display = 'block';
+        codeEl.focus();
       }
     } else {
       document.location = '/current-codes';
