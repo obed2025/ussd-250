@@ -9,9 +9,10 @@ import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
+  showSearch?: boolean;
 }
 
-const { title = 'Home' } = Astro.props;
+const { title = 'Home', showSearch = true } = Astro.props;
 ---
 
 <html lang="en">
@@ -35,7 +36,7 @@ const { title = 'Home' } = Astro.props;
   <body class="container">
     <Header />
     <main>
-      {Astro.url.pathname !== '/new' && <SearchBox />}
+      {showSearch && <SearchBox />}
       <slot />
     </main>
     <Footer />
